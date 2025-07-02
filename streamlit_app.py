@@ -31,7 +31,7 @@ def parse_availability(text):
 
     return probs
 
-def smooth_availability(probs, sigma=0.1):
+def smooth_availability(probs, sigma=1):
     smoothed = np.zeros_like(probs)
     for i in range(len(probs)):
         weights = np.exp(-0.5 * ((np.arange(len(probs)) - i) / sigma) ** 2)
@@ -73,7 +73,7 @@ if st.button("Check Times"):
         all_probs = []
         for text in inputs:
             raw = parse_availability(text)
-            smoothed = smooth_availability(raw, sigma=0.1)
+            smoothed = smooth_availability(raw, sigma=0.5)
             all_probs.append(smoothed)
 
         all_probs = np.array(all_probs)
