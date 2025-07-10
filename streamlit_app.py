@@ -77,6 +77,10 @@ if st.button("Check Times"):
             all_probs.append(smoothed)
 
         all_probs = np.array(all_probs)
+
+        phantom_probs = np.full((3, NUM_BLOCKS), 0.2)  # 3 people, 20% chance per hour
+        all_probs = np.vstack([all_probs, phantom_probs])
+
         # --- Generate and display probability graph ---
         hourly_probs = []
         for hour in range(NUM_BLOCKS):
